@@ -79,7 +79,7 @@ python evaluate_bboxes.py --data_path DATA_folder
 
 ### Training
 
-To train the model, follow the steps for evaluation on FSC147, correct paths in `train.sh` and `pretrain.sh` and run the following commands:
+To train the model, follow the steps for evaluation on FSC147, correct paths in `train.sh` and `pretrain.sh`, download box annotations for [train split](https://drive.google.com/file/d/15_qpEZ7f0ZBrcTmgFnxx71lCdxAGtuTz/view?usp=sharing)  and run the following commands:
 
 First run pretraining:
 ```bash
