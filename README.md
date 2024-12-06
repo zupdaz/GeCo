@@ -10,7 +10,10 @@
 This repository holds the official Pytorch implementation for the paper [A Novel Unified Architecture for Low-Shot Counting by Detection and Segmentation](https://arxiv.org/pdf/2409.18686) accepted at NeurIPS 2024.
 
 
-https://github.com/user-attachments/assets/7b769d77-5252-4a98-9aac-716ae680a312
+
+https://github.com/user-attachments/assets/cbdd1fbb-5b07-43c0-95e4-6bf0e5b2896a
+
+
 
 
 
@@ -103,4 +106,8 @@ publisher={Curran Associates, Inc.} }
 
 ## Possible applications
 
-https://github.com/user-attachments/assets/33e637c8-ff3c-4db4-862f-4750dcf03c3d
+
+https://github.com/user-attachments/assets/e61c791d-389a-486e-a1bd-3713455df0a9
+
+
+
