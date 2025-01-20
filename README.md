@@ -86,7 +86,7 @@ To train the model, follow the steps for evaluation on FSC147, correct paths in 
 
 First, generate density maps:
 ```bash
-pyton utils/data.py
+python utils/data.py
 ```
 
 First run pretraining:
