@@ -10,47 +10,14 @@ from torchvision import ops
 from utils.data import resize_and_pad
 import matplotlib.pyplot as plt
 
-bounding_boxes = []
-global clicked
-
-# Global variables to track drawing state
-rect = None
-start_x, start_y = None, None
-
-# Event handler for mouse press (start drawing)
-def on_press(event):
-    global start_x, start_y, rect
-    if event.inaxes:
-        start_x, start_y = event.xdata, event.ydata  # Store starting point
-        # Create a rectangle (but do not draw yet)
-        rect = patches.Rectangle((start_x, start_y), 0, 0, linewidth=2, edgecolor='r', facecolor='none')
-        event.inaxes.add_patch(rect)
-        plt.draw()  # Update plot to show rectangle (even if not yet drawn)
-
-# Event handler for mouse motion (while drawing)
-def on_motion(event):
-    global start_x, start_y, rect
-    if rect is not None and event.inaxes:
-        # Update the width and height of the rectangle based on mouse position
-        width = event.xdata - start_x
-        height = event.ydata - start_y
-        rect.set_width(width)
-        rect.set_height(height)
-        plt.draw()  # Redraw to update the rectangle while dragging
-
-# Event handler for mouse release (end drawing)
-def on_release(event):
-    global rect
-    # Once mouse is released, we finalize the bounding box
-    if rect is not None:
-        bounding_boxes.append([rect.get_x(), rect.get_y(), rect.get_x() + rect.get_width(), rect.get_y() + rect.get_height()])
-        rect = None  # Reset rect after release
-
+# Hardcoded bounding boxes (format: [x_min, y_min, x_max, y_max])
+bounding_boxes = [
+    [50, 50, 150, 150],  # Example bounding box 1 # Example bounding box 2
+]
 
 @torch.no_grad()
 def demo(args):
     img_path = args.image_path
-    global fig, ax
 
     gpu = 0
     torch.cuda.set_device(gpu)
@@ -67,23 +34,9 @@ def demo(args):
 
     model.eval()
 
-    image =  T.ToTensor()(Image.open(img_path).convert("RGB"))
-
-    # Create a figure and axis
-    fig, ax = plt.subplots(1)
-    ax.imshow(image.permute(1,2,0))
-    plt.axis('off')
-    # Connect the click event
-    fig.canvas.mpl_connect('button_press_event', on_press)
-    fig.canvas.mpl_connect('motion_notify_event', on_motion)
-    fig.canvas.mpl_connect('button_release_event', on_release)
-
-    plt.title("Click and drag to draw bboxes, then close window")
-    # Show the image
-    plt.show()
+    image = T.ToTensor()(Image.open(img_path).convert("RGB"))
 
     bboxes = torch.tensor(bounding_boxes, dtype=torch.float32)
-
     img, bboxes, scale = resize_and_pad(image, bboxes, full_stretch=False)
     img = img.unsqueeze(0).to(device)
     bboxes = bboxes.unsqueeze(0).to(device)
@@ -121,7 +74,6 @@ def demo(args):
     pred_boxes = bboxes.cpu() / torch.tensor([scale, scale, scale, scale]) * img.shape[-1]
     for i in range(len(pred_boxes)):
         box = pred_boxes[i]
-
         plt.plot([box[0], box[0], box[2], box[2], box[0]], [box[1], box[3], box[3], box[1], box[1]], linewidth=0.7,
                  color='orange')
 
