@@ -39,7 +39,7 @@ To run the demo, you need to download the [pretrained weights](https://drive.goo
 **Run the demo:**
 
 ```bash
-python demo.py --image_path ./material/4.jpg --output_masks
+python demo.py --image_path ./material/3.jpg --output_masks
 ```
 
 
