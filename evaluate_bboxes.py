@@ -525,7 +525,7 @@ if __name__ == '__main__':
     gt_json_path = dataset_folder+"/annotations/instances_val.json"
 
     pred_json_path = 'geco_val.json'
-    counting_json_path = dataset_folder+"/annotation_FSC147_384.json"
+    counting_json_path = dataset_folder+"/annotations/annotation_FSC147_384.json"
     output_dir = input_folder
     coco_evaluator = COCOEvaluator(
         gt_json_file=gt_json_path,
@@ -541,7 +541,7 @@ if __name__ == '__main__':
     print("Evaluating on test set")
     gt_json_path = dataset_folder+"/annotations/instances_test.json"
     pred_json_path = 'geco_test.json'
-    counting_json_path = dataset_folder+"/annotation_FSC147_384.json"
+    counting_json_path = dataset_folder+"/annotations/annotation_FSC147_384.json"
     output_dir = input_folder
     coco_evaluator = COCOEvaluator(
         gt_json_file=gt_json_path,
